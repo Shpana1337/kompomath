@@ -16,14 +16,11 @@ x0=-12
 xe=12 - step
 
 while x0 <= xe:
-    
     x0+=step
     f.append(x0)
     
 
-
 class binds():
-
     def on_num0(e):
         config.num0['bg'] = '#CBCBCB'
         config.num0['fg'] = 'black'
@@ -49,7 +46,7 @@ class binds():
         config.num3['bg'] = '#373737'
         config.num3['fg'] = 'white'
     def on_num4(e):
-        config.num4['bg'] = '#CBCBCB'            #  '#EFEFEF'
+        config.num4['bg'] = '#CBCBCB'           
         config.num4['fg'] = 'black'
     def on_num4l(e):
         config.num4['bg'] = '#373737'
@@ -198,7 +195,6 @@ class binds():
         config.info['fg'] = 'white'
 
 class commands():
-
     def function():
         global pressflaginfo
         global globalxy
@@ -222,12 +218,8 @@ class commands():
         fx = fx.replace('^','**')
         f1 = flagx = ff = mainflag = fdel = fdel1  = fdelx = firstx = False
         kx1 = kx2 = 0
-        #st = st2 = tt = ''
-        #k = ks1 = ks2 = 0
         if (fx.count('(') == fx.count(')')) and ('()' not in fx) and len(fx) > 0:
-
             for i in range(len(fx)): 
-
                 if fx[i] in numbers and i != len(fx) - 1 and (fx[i+1] == '(' or fx[i+1] == '√'):
                     fx = fx[:i+1] + '*' + fx[i+1:]
 
@@ -242,13 +234,13 @@ class commands():
                     fdel=True
                     deli.append('')
 
-                
 
                 if fdel == True:
                     for j in range(len(deli)):
                         if len(deli[j]) == 0:
                             if fx[i] != '/':
                                 deli[j]+=fx[i]
+                                
                         else: deli[j]+=fx[i]
 
                     for a in range(len(deli)):
@@ -258,8 +250,8 @@ class commands():
                                 odz.append(deli[a])
                                 deli = deli[:a] + deli[a+1:]
 
-                    if fx[i] == 'x' and fdelx==False:
-                        fdelx=True
+                    if fx[i] == 'x' and fdelx == False:
+                        fdelx = True
 
 
                 if ff == True:
@@ -267,6 +259,7 @@ class commands():
                         if len(sqrt[j]) == 0:
                             if fx[i] != '√':
                                 sqrt[j] += fx[i]
+                                
                         else: sqrt[j] += (fx[i])
                     
                     for a in range(len(sqrt)):
@@ -291,17 +284,14 @@ class commands():
                         if '!' not in odz2:
                             if (eval(odz2)) < 0:
                                 xxdop.append(xx[j])
+                                
                         else:
                             if (eval(odz2.replace('!',''))) == 0:
                                 xxdop.append(xx[j])
 
             for i in range(len(xxdop)):
-                xx = xx[:(xx.index(xxdop[i]))] + xx[(xx.index(xxdop[i]))+1:]    
-
-            #if -12 in xx:
-                #xx.remove(-12)                      ####  проблема в первом while f.append 
-
-
+                xx = xx[:(xx.index(xxdop[i]))] + xx[(xx.index(xxdop[i]))+1:]
+                
             xx.sort()
 
         globalxy[len(globalxy)-1].append(xx)
@@ -311,36 +301,22 @@ class commands():
             mainflag = True
 
         if mainflag == False:
-
             if 'x' in fx:
                 if len(xx) >= 1:
-
                     for i in range(len(xx)):
                         fx2 = fx
                         fx2 = fx2.replace('x', str(xx[i]))
-                        #print(fx2)
                         d = eval(fx2) 
                         miny = min(miny,d)
                         x = ((xx[i]) * 20) + 250 
                         y = (-d * 20) + 250
-                        
                         globalxy[len(globalxy)-1][2].append(d)
 
                         if firstx == True and xx[i] <= 13:
-                            config.canvas.create_line(x1,y1,x,y, fill = '#FF0000', width = 1)
-                                                                                            ## дельта d
-                            #if abs(d) <= 50:  
-                            #    if abs(max(d,d1) - min(d,d1)) >= 1:
-                            #        ST = f'{min(d,d1)} {max(d1,d)}' 
-                            #        globalxy[len(globalxy)-1][2].append(ST) 
-
-                            #    else:
-                            #        globalxy[len(globalxy)-1][2].append(d)  
-                            #        globalxy[len(globalxy)-1][2].append(d1) 
+                            config.canvas.create_line(x1,y1,x,y, fill = '#FF0000', width 
 
                         x1 = x 
                         y1 = y
-                        #d1 = d
                         firstx = True
 
             else:
@@ -348,6 +324,7 @@ class commands():
                 miny = min(miny,eval(fx))
             
             commands.press()
+            
             if pressflaginfo == 1: commands.infopush()
 
         else: mb.showerror(title = 'Ошибка', message = 'Нет решений')  
@@ -359,20 +336,22 @@ class commands():
             config.enter.delete(0,tk.END)
             config.enter.insert(0,value)
 
+
     def add_digit(digit):
         value = config.enter.get() + digit
         config.enter.delete(0,tk.END)
         config.enter.insert(0,value)
 
+
     def press():
         global pressflag
+        
         if pressflag==0:
             config.btn.place_forget()
             config.frameleft.place_forget()
             config.btn['text'] = '<<'
             config.btn.place(x=251,y=0,height = '26')
             config.frameleft.place(x=-225,y=0)
-            #config.enter.place(x=450,y=550)
             pressflag=1
 
         else:
@@ -384,10 +363,12 @@ class commands():
             config.frameleft.place(x=-476,y=0)
             pressflag=0
 
+
     def clearing():
         global pressflag
         global pressflaginfo
         global globalxy
+        
         globalxy=[]
         config.enter.delete(0,tk.END)
         config.enter.insert(0,' F(x) = ')
@@ -409,34 +390,43 @@ class commands():
 
         if pressflag == 0:
             commands.press()
+            
         if pressflaginfo == 1:
             commands.infopush()
 
-        ## создание штрихов
+        # создание штрихов
         for i in range(10,491,20):
             config.canvas.create_line(i,253,i,247)
             config.canvas.create_line(252,i,247,i)
+            
             if f-12 < 0:
                 config.canvas.create_text(i-2,258, text = str(f-12),font=('calibri',7,'normal'))
                 if len(str(abs(f-12))) >= 2:
                     config.canvas.create_text(240,500-i, text = str(f-12),font=('calibri',7,'normal'))
+                    
                 else:
                     config.canvas.create_text(242,500-i, text = str(f-12),font=('calibri',7,'normal'))
+
             elif f-12 == 0:
                 config.canvas.create_text(i-5,255, text = str(f-12),font=('calibri',7,'normal'))
 
             else:
                 config.canvas.create_text(i,258, text = str(f-12),font=('calibri',7,'normal'))
+
                 if len(str(abs(f-12))) >= 2:
                     config.canvas.create_text(240,500-i, text = str(f-12),font=('calibri',7,'normal'))
-                else: config.canvas.create_text(242,500-i, text = str(f-12),font=('calibri',7,'normal'))
+
+                else:
+                    config.canvas.create_text(242,500-i, text = str(f-12),font=('calibri',7,'normal'))
 
             f+=1
+
 
     def infopush():
         global pressflaginfo
         global globalxy
         global cel
+        
         first = False
         k=last=0
         h=10
@@ -444,6 +434,7 @@ class commands():
         eh = 100
         df='D(f) = '
         ef='E(f) = '                 #⋃ ꝏ
+        
         if pressflaginfo == 0:       #open
             if len(globalxy) > 0:
                 for i in range(len(globalxy)):
@@ -454,6 +445,7 @@ class commands():
                     if type(min(globalxy[i][1])) == int: 
                         if (min(globalxy[i][1])) == -50:
                             df += '(-ꝏ;'
+                            
                         else:
                             df += f'[{min(globalxy[i][1])}; '
 
@@ -482,77 +474,54 @@ class commands():
                             if k>0:
                                 if k % 2 == 0:
                                     df += f'⋃ ({fork};+ꝏ)'
-                                    #print(1)
+
                                 else:
                                     df += f'⋃ ({fork};{last}) ⋃ ({last};+ꝏ)'
-                                    #print(2)
+
                             else:
                                 if first != True:
                                     df += '+ꝏ) '
+                                    
                                 else:
                                     df += f'⋃ ({onfirst};+ꝏ)'
-                                #print(3)
+
                     else:
                         if type(max(globalxy[i][1])) == int:
                             if k>0:
                                 if k % 2 == 0:
                                     df += f'⋃ ({fork};{max(globalxy[i][1])}]'
-                                    #print(4)
+
                                 else:
                                     df += f'⋃ ({fork};{last}) ⋃ ({last};{max(globalxy[i][1])}]'
-                                    #print(5)
+
                             else:
                                 if first != True:
                                     df += f'{max(globalxy[i][1])}]'
+
                                 else: df += f'⋃ ({onfirst};{max(globalxy[i][1])}]'
-                                #print(6)
 
                         else:
                             if k > 0:
                                 if k % 2 == 0:
                                     df += f'⋃ ({fork};{math.ceil(max(globalxy[i][1]))})'
-                                    #print(7)
+
                                 else:
                                     df += f'⋃ ({fork};{last}) ⋃ ({last};{math.ceil(max(globalxy[i][1]))})'
-                                    #print(8)
+
                             else:
                                 if first != True:
                                     df += f'{max(globalxy[i][1])})'
+                                    
                                 else:
                                     df += f'⋃ ({onfisrt};{math.ceil(max(globalxy[i][1]))})'
-                                #print(9)
 
                     config.canvas2.create_text(10,45, text= df, font = ('Calibri', 13, 'normal'), anchor = tk.W)
                     ############################################################  D(f)
 
                     ############################################################  E(f)
-                    
                     dop = [] 
                     first = True
   
-                    #for j in range(len(globalxy[i][2])):
-
-                    #    if type(globalxy[i][2][j]) == str:
-
-                    #        f = globalxy[i][2][j].split(' ')
-                    #        #globalxy[i][2].pop(j) 
-
-                    #        for g in range(math.floor(float(f[0])), math.ceil(float(f[1]))):
-                    #            dop.append(g)
-
-                    #    else:
-                    #        for e in range(str(globalxy[i][2][j]).index('.')+1, len(str(globalxy[i][2][j]))):
-                    #            if (str(globalxy[i][2][j]))[e] != '0':
-                    #                first = False
-
-                    #        if first == True:
-                    #            if (int(globalxy[i][2][j])) not in dop:
-                    #                dop.append(int(globalxy[i][2][j]))
-
-                    #        first = True
-
-                    #dop.sort()
-                    #print(dop)
                     config.canvas2.create_text(10,65, text= ef, font = ('Calibri', 13, 'normal'), anchor = tk.W)
                     ############################################################  E(f)
 
@@ -572,7 +541,6 @@ class commands():
 
 
 class config():
-
     win = tk.Tk()
     win.geometry('524x500')
     win.resizable(False,False)
@@ -596,27 +564,31 @@ class config():
     y0=250
     f=0
 
-    ## создание штрихов
+    # создание штрихов
     for i in range(10,491,20):
         canvas.create_line(i,253,i,247)
         canvas.create_line(252,i,247,i)
         if f-12 < 0:
             canvas.create_text(i-2,258, text = str(f-12),font=('calibri',7,'normal'))
+
             if len(str(abs(f-12))) >= 2:
                 canvas.create_text(240,500-i, text = str(f-12),font=('calibri',7,'normal'))
+
             else:
                 canvas.create_text(242,500-i, text = str(f-12),font=('calibri',7,'normal'))
+
         elif f-12 == 0:
             canvas.create_text(i-5,255, text = str(f-12),font=('calibri',7,'normal'))
 
         else:
             canvas.create_text(i,258, text = str(f-12),font=('calibri',7,'normal'))
+
             if len(str(abs(f-12))) >= 2:
                 canvas.create_text(240,500-i, text = str(f-12),font=('calibri',7,'normal'))
+
             else: canvas.create_text(242,500-i, text = str(f-12),font=('calibri',7,'normal'))
 
         f+=1
-
 
     frameleft=tk.Frame(win, width=500, height = 417, bg ='gray') 
     frameinfo = tk.Frame(win, width = 500, height = 417, bg = 'gray')
@@ -630,8 +602,7 @@ class config():
     canvas2= tk.Canvas(frameright, height = 1000, width = 255, bg = '#CBCBCB') 
     canvas2.place(x=-5,y=25)
 
-    ## Кнопки
-    
+    # Кнопки
     btn=tk.Button(win,text='>>', command = commands.press, bg='#6B6B6B', padx=5, font=('Calibri',7,'normal'))
     funcall = tk.Button(frameleft, text = '=', command = commands.function ,bg='#373737', padx=30, pady=20, font=('Calibri',10,'normal'), fg='white' )
     btn1=tk.Button(frameleft, text = 'X', command =lambda: commands.add_digit('x'),bg='#6B6B6B', padx=30, pady=5, font=('Calibri',10,'normal'), fg='white' )
@@ -663,7 +634,6 @@ class config():
     info = tk.Button(win, text = '<<Info', bg = '#6B6B6B', font=('Calibri', 10, 'normal'), command = commands.infopush, fg = 'white')
 
     #Бинды
-
     num0.bind('<Enter>', binds.on_num0) 
     num0.bind('<Leave>', binds.on_num0l)
     num1.bind('<Enter>', binds.on_num1) 
@@ -725,8 +695,8 @@ class config():
     info.bind('<Leave>', binds.on_infol)
 
 
-class packs():      #дельта x = 75, у = 64
-    config.num7.place(x=225, y = 160)  #config.num7.place(x=247, y = 164)
+class packs():      
+    config.num7.place(x=225, y = 160)  
     config.num8.place(x=300, y = 160)
     config.num9.place(x=375, y = 160)
     config.num4.place(x=225, y = 224)
@@ -739,17 +709,17 @@ class packs():      #дельта x = 75, у = 64
     config.funcall.place(x=225, y = 352)
     config.dotb.place(x=375, y = 352)
     config.btn.place(x=0,y=0, height = 26)
-    config.btn1.place(x=225,y=92, width = 75) # config.btn1.place(x=225,y=95, width = 75)
+    config.btn1.place(x=225,y=92, width = 75)
     config.btn2.place(x=300,y=92, width = 75)
     config.btn3.place(x=375,y=92, width = 76)
     config.frameleft.place(x=-476,y=0)
     config.frameleftdown.place(x=-476, y = 420) 
-    config.frameright.place(x=530, y = 0)   ################
+    config.frameright.place(x=530, y = 0)  
     config.delete.place(x=450,y=59, width = 50, height = 30)
-    config.clear.place(x=482,y=473)  #config.clear.place(x=484,y=26)
+    config.clear.place(x=482,y=473)
     config.info.place(x=482,y=0, width = 42)
     config.plus.place(x=300,y=126)
-    config.minus.place(x=225,y=126)   ### y на 4 
+    config.minus.place(x=225,y=126) 
     config.umn.place(x=375,y=126, width = 76)
     config.btnu1.place(x=451,y=92,width = 49)
     config.btnu2.place(x=451,y=160)
@@ -759,4 +729,3 @@ class packs():      #дельта x = 75, у = 64
     config.framerighttext.place(x = 95,y = 0)
 
 config.win.mainloop()
-
